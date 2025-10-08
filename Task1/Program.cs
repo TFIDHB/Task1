@@ -48,7 +48,7 @@ namespace Task1
             }
         }
 
-        static bool ReadContinueChoice()
+        static bool ShouldContinue()
         {
             while (true)
             {
@@ -120,7 +120,7 @@ namespace Task1
 
                 }
 
-            } while (ReadContinueChoice());
+            } while (ShouldContinue());
 
             Console.WriteLine("Выход...");
         }
