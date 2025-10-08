@@ -5,18 +5,15 @@ namespace Task1
 {
     class Program
     {
-       static double readDouble(string require)
+
+        static char[] validOperations = { '+', '-', '*', '/' };
+        static double ReadDouble(string require)
         {
             while (true)
             {
                 Console.Write(require);
                 string input = Console.ReadLine();
 
-                if (input == null)
-                {
-                    Console.WriteLine("Ввод прерван!");
-                    continue;
-                }
                 if (double.TryParse(input, out double num))
                 {
                     return num;
@@ -27,18 +24,13 @@ namespace Task1
 
         }
 
-        static char readOpr(string require)
+        static char ReadOpr(string require)
         {
             while (true)
             {
                 Console.Write(require);
                 string input = Console.ReadLine();
 
-                if (input == null)
-                {
-                    Console.WriteLine("Ввод прерван!");
-                    continue;
-                }
 
                 if (string.IsNullOrWhiteSpace(input))
                 {
@@ -47,7 +39,7 @@ namespace Task1
                 }
 
                 char op = input[0];
-                if (op == '+' || op == '-' || op == '*' || op == '/')
+                if (validOperations.Contains(op))
                 {
                     return op;
                 }
@@ -56,19 +48,13 @@ namespace Task1
             }
         }
 
-        static char readContinueChoice()
+        static bool ReadContinueChoice()
         {
             while (true)
             {
                 Console.WriteLine("Продолжить? (Y/N)");
 
                 string input = Console.ReadLine();
-
-                if (input == null)
-                {
-                    Console.WriteLine("Ввод прерван!");
-                    continue;
-                }
 
                 if (string.IsNullOrWhiteSpace(input))
                 {
@@ -77,9 +63,14 @@ namespace Task1
                 }
 
                 char next = char.ToUpper(input[0]);
-                if (next == 'Y' || next == 'N')
+                if (next == 'Y')
                 {
-                    return next;
+                    return true;
+                }
+
+                else
+                {
+                    return false;
                 }
 
                 Console.WriteLine("Некорректный ввод! Введите Y для продолжения или N для выхода.");
@@ -95,11 +86,11 @@ namespace Task1
                 Console.Clear();
                 Console.WriteLine("Калькулятор");
 
-                double num1 = readDouble("Введите первое число: ");
+                double num1 = ReadDouble("Введите первое число: ");
 
-                char operation = readOpr("Выберите операцию (+, -, *, /): ");
+                char operation = ReadOpr("Выберите операцию (+, -, *, /): ");
 
-                double num2 = readDouble("Введите второе число: ");
+                double num2 = ReadDouble("Введите второе число: ");
 
 
                 switch (operation)
@@ -129,9 +120,7 @@ namespace Task1
 
                 }
 
-                next = readContinueChoice();
-
-            } while (next == 'Y');
+            } while (ReadContinueChoice());
 
             Console.WriteLine("Выход...");
         }
